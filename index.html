@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WeatherGPT Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <h1>🌦️ WeatherGPT</h1>
+
+            <p class="subtitle">Weather Dashboard</p>
+
+            <div class="menu">
+                <button onclick="showDashboard()">🏠 Dashboard</button>
+                <button onclick="clearWeather()">🗑️ Clear Data</button>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main">
+
+            <header>
+                <h2>Weather Dashboard</h2>
+                <p>Enter the weather information below.</p>
+            </header>
+
+
+            <!-- INPUT SECTION -->
+            <section class="input-card">
+
+                <h3>📍 Enter Weather Details</h3>
+
+                <div class="input-grid">
+
+                    <div class="input-group">
+                        <label>City / Location</label>
+                        <input
+                            type="text"
+                            id="city"
+                            placeholder="Example: Amalapuram"
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Temperature (°C)</label>
+                        <input
+                            type="number"
+                            id="temperature"
+                            placeholder="32"
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Feels Like (°C)</label>
+                        <input
+                            type="number"
+                            id="feelsLike"
+                            placeholder="35"
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Humidity (%)</label>
+                        <input
+                            type="number"
+                            id="humidity"
+                            placeholder="70"
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Wind Speed (km/h)</label>
+                        <input
+                            type="number"
+                            id="wind"
+                            placeholder="15"
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Rainfall (mm)</label>
+                        <input
+                            type="number"
+                            id="rain"
+                            placeholder="0"
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Weather Condition</label>
+
+                        <select id="condition">
+
+                            <option value="Clear Sky">
+                                ☀️ Clear Sky
+                            </option>
+
+                            <option value="Partly Cloudy">
+                                🌤️ Partly Cloudy
+                            </option>
+
+                            <option value="Cloudy">
+                                ☁️ Cloudy
+                            </option>
+
+                            <option value="Rainy">
+                                🌧️ Rainy
+                            </option>
+
+                            <option value="Stormy">
+                                ⛈️ Stormy
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="buttons">
+
+                    <button
+                        class="update-btn"
+                        onclick="updateWeather()"
+                    >
+                        🔍 Update Dashboard
+                    </button>
+
+                    <button
+                        class="clear-btn"
+                        onclick="clearWeather()"
+                    >
+                        Clear
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- CURRENT WEATHER -->
+            <section class="weather-card">
+
+                <div class="location">
+
+                    <p>📍 Location</p>
+
+                    <h2 id="displayCity">
+                        Enter Location
+                    </h2>
+
+                </div>
+
+
+                <div class="current-weather">
+
+                    <div class="weather-icon" id="weatherIcon">
+                        ☀️
+                    </div>
+
+                    <div>
+
+                        <div class="temperature">
+
+                            <span id="displayTemperature">
+                                --
+                            </span>
+
+                            <span>°C</span>
+
+                        </div>
+
+                        <p id="displayCondition">
+                            Waiting for input...
+                        </p>
+
+                        <p>
+                            Feels like
+                            <strong id="displayFeels">
+                                --
+                            </strong>°C
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- WEATHER STATS -->
+            <section class="stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        💧
+                    </div>
+
+                    <div>
+                        <p>Humidity</p>
+                        <h3>
+                            <span id="displayHumidity">--</span>%
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        💨
+                    </div>
+
+                    <div>
+                        <p>Wind Speed</p>
+                        <h3>
+                            <span id="displayWind">--</span>
+                            km/h
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🌧️
+                    </div>
+
+                    <div>
+                        <p>Rainfall</p>
+                        <h3>
+                            <span id="displayRain">--</span>
+                            mm
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🌡️
+                    </div>
+
+                    <div>
+                        <p>Feels Like</p>
+                        <h3>
+                            <span id="displayFeels2">--</span>
+                            °C
+                        </h3>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- WEATHERGPT -->
+            <section class="ai-card">
+
+                <h3>🤖 WeatherGPT</h3>
+
+                <p id="weatherMessage">
+                    Enter your weather information and click
+                    "Update Dashboard".
+                </p>
+
+            </section>
+
+
+            <!-- FORECAST -->
+            <section class="forecast-card">
+
+                <h3>📅 Forecast</h3>
+
+                <div class="forecast-grid">
+
+                    <div>
+                        <strong>Today</strong>
+                        <span>☀️</span>
+                        <p id="forecastToday">--</p>
+                    </div>
+
+                    <div>
+                        <strong>Tomorrow</strong>
+                        <span>🌤️</span>
+                        <p id="forecastTomorrow">--</p>
+                    </div>
+
+                    <div>
+                        <strong>Day 3</strong>
+                        <span>☁️</span>
+                        <p>--</p>
+                    </div>
+
+                    <div>
+                        <strong>Day 4</strong>
+                        <span>🌧️</span>
+                        <p>--</p>
+                    </div>
+
+                    <div>
+                        <strong>Day 5</strong>
+                        <span>☀️</span>
+                        <p>--</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
